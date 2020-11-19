@@ -1,1 +1,0 @@
-initSidebarItems({"enum":[["Environment","Enum to map to desired environment so as to access certificate and the base url Required to construct a new `Mpesa` struct"]]});

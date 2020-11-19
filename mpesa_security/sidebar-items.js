@@ -1,1 +1,0 @@
-initSidebarItems({"trait":[["MpesaSecurity","Trait responsible for implementation of security configs for Mpesa"]]});

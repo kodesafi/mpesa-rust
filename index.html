@@ -1,35 +1,202 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="API documentation for the Rust `mpesa` crate."><meta name="keywords" content="rust, rustlang, rust-lang, mpesa"><title>mpesa - Rust</title><link rel="stylesheet" type="text/css" href="normalize.css"><link rel="stylesheet" type="text/css" href="rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="dark.css"><link rel="stylesheet" type="text/css" href="light.css" id="themeStyle"><script src="storage.js"></script><noscript><link rel="stylesheet" href="noscript.css"></noscript><link rel="shortcut icon" href="favicon.ico"><style type="text/css">#crate-search{background-image:url("down-arrow.svg");}</style></head><body class="rustdoc mod"><!--[if lte IE 8]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu">&#9776;</div><a href='../mpesa/index.html'><div class='logo-container'><img src='rust-logo.png' alt='logo'></div></a><p class='location'>Crate mpesa</p><div class="sidebar-elems"><a id='all-types' href='all.html'><p>See all mpesa's items</p></a><div class="block items"><ul><li><a href="#reexports">Re-exports</a></li><li><a href="#modules">Modules</a></li><li><a href="#structs">Structs</a></li><li><a href="#enums">Enums</a></li></ul></div><p class='location'></p><script>window.sidebarCurrent = {name: 'mpesa', ty: 'mod', relpath: '../'};</script></div></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!"><img src="brush.svg" width="18" alt="Pick another theme!"></button><div id="theme-choices"></div></div><script src="theme.js"></script><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" disabled autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><a id="settings-menu" href="settings.html"><img src="wheel.svg" width="18" alt="Change settings"></a></div></form></nav><section id="main" class="content"><h1 class='fqn'><span class='out-of-band'><span id='render-detail'><a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">[<span class='inner'>&#x2212;</span>]</a></span><a class='srclink' href='src/mpesa/lib.rs.html#1-55' title='goto source code'>[src]</a></span><span class='in-band'>Crate <a class="mod" href=''>mpesa</a></span></h1><div class='docblock'><h2 id="about" class="section-header"><a href="#about">About</a></h2>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="API documentation for the Rust `mpesa` crate."><meta name="keywords" content="rust, rustlang, rust-lang, mpesa"><title>mpesa - Rust</title><link rel="stylesheet" type="text/css" href="../normalize.css"><link rel="stylesheet" type="text/css" href="../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../dark.css"><link rel="stylesheet" type="text/css" href="../light.css" id="themeStyle"><script src="../storage.js"></script><noscript><link rel="stylesheet" href="../noscript.css"></noscript><link rel="shortcut icon" href="../favicon.ico"><style type="text/css">#crate-search{background-image:url("../down-arrow.svg");}</style></head><body class="rustdoc mod"><!--[if lte IE 8]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu">&#9776;</div><a href='../mpesa/index.html'><div class='logo-container'><img src='../rust-logo.png' alt='logo'></div></a><p class='location'>Crate mpesa</p><div class="sidebar-elems"><a id='all-types' href='all.html'><p>See all mpesa's items</p></a><div class="block items"><ul><li><a href="#modules">Modules</a></li><li><a href="#structs">Structs</a></li><li><a href="#enums">Enums</a></li><li><a href="#traits">Traits</a></li><li><a href="#types">Type Definitions</a></li></ul></div><p class='location'></p><script>window.sidebarCurrent = {name: 'mpesa', ty: 'mod', relpath: '../'};</script></div></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!"><img src="../brush.svg" width="18" alt="Pick another theme!"></button><div id="theme-choices"></div></div><script src="../theme.js"></script><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" disabled autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><a id="settings-menu" href="../settings.html"><img src="../wheel.svg" width="18" alt="Change settings"></a></div></form></nav><section id="main" class="content"><h1 class='fqn'><span class='out-of-band'><span id='render-detail'><a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">[<span class='inner'>&#x2212;</span>]</a></span><a class='srclink' href='../src/mpesa/lib.rs.html#1-209' title='goto source code'>[src]</a></span><span class='in-band'>Crate <a class="mod" href=''>mpesa</a></span></h1><div class='docblock'><h2 id="about" class="section-header"><a href="#about">About</a></h2>
 <p>A Rust wrapper around the <a href="https://developer.safaricom.co.ke/docs?shell#introduction">Safaricom API</a> for accessing M-Pesa services.</p>
-<h2 id="notes" class="section-header"><a href="#notes">Notes</a></h2>
-<p><strong>Warning!</strong> v0.*. Expect bugs therefore not recommended for use in production. Pull requests and issues very welcome.</p>
-<h2 id="install--usage" class="section-header"><a href="#install--usage">Install &amp; Usage</a></h2>
-<p>In your <code>Cargo.toml</code> file:</p>
+<h2 id="disclaimer" class="section-header"><a href="#disclaimer">Disclaimer</a></h2>
+<p><strong>Warning!</strong> WIP, not production ready</p>
+<h2 id="install" class="section-header"><a href="#install">Install</a></h2>
+<p><code>Cargo.toml</code></p>
 <pre><code class="language-md">[dependencies]
-mpesa = &quot;0.1.6&quot;
+mpesa = &quot;0.2.0&quot;
 </code></pre>
 <p>In your lib or binary crate:</p>
 <pre><code class="language-rs">use mpesa::Mpesa;
 </code></pre>
-<h2 id="examples" class="section-header"><a href="#examples">Examples</a></h2>
-<p>Use <a href="https://docs.rs/dotenv/0.15.0/dotenv/fn.dotenv.html"><code>dotenv</code></a> crate to store your keys as environmental variables instead of hard coding them like done in the example below.</p>
-<pre><code class="language-rs">use mpesa::{Mpesa, Environment};
-use std::env;
+<h2 id="usage" class="section-header"><a href="#usage">Usage</a></h2><h3 id="creating-a-client" class="section-header"><a href="#creating-a-client">Creating a <code>Client</code></a></h3>
+<p>You will first need to create an instance of the <code>Mpesa</code> instance (the client). You are required to provide a <strong>CLIENT_KEY</strong>,
+<strong>CLIENT_SECRET</strong> and <strong>INIT_PASSWORD</strong> (initiator password). <a href="https://developer.safaricom.co.ke/test_credentials">Here</a> is how you can get these credentials for the Safaricom sandbox
+environment.</p>
+<p>There are two ways you can instantiate <code>Mpesa</code>:
+NOTE: only calling <code>unwrap</code> for demonstration purposes. Errors are handled appropriately in the lib via the <code>MpesaError</code> enum.</p>
 
-let client = Mpesa::new(
-      env::var(&quot;CLIENT_KEY&quot;)?,
-      env::var(&quot;CLIENT_SECRET&quot;)?,
-      Environment::Sandbox,
-      env::var(&quot;INIT_PASSWORD&quot;)?,
+<div class="example-wrap"><pre class="rust rust-example-rendered">
+<span class="kw">use</span> <span class="ident">mpesa</span>::{<span class="ident">Mpesa</span>, <span class="ident">Environment</span>};
+<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">env</span>;
+<span class="kw">use</span> <span class="ident">dotenv</span>::<span class="ident">dotenv</span>;
+
+<span class="ident">dotenv</span>().<span class="ident">ok</span>();
+
+<span class="kw">let</span> <span class="ident">client</span>: <span class="ident">Mpesa</span> <span class="op">=</span> <span class="ident">Mpesa</span>::<span class="ident">new</span>(
+    <span class="ident">env</span>::<span class="ident">var</span>(<span class="string">&quot;CLIENT_KEY&quot;</span>).<span class="ident">unwrap</span>(),
+    <span class="ident">env</span>::<span class="ident">var</span>(<span class="string">&quot;CLIENT_SECRET&quot;</span>).<span class="ident">unwrap</span>(),
+    <span class="ident">Environment</span>::<span class="ident">Sandbox</span>,
 );
-</code></pre>
+<span class="macro">assert</span><span class="macro">!</span>(<span class="ident">client</span>.<span class="ident">is_connected</span>().<span class="ident">unwrap</span>())</pre></div>
+<p>Since the <code>Environment</code> enum implements <code>FromStr</code>, you can pass the name of the environment as a <code>&amp;str</code> and call the <code>parse()</code>
+method to create an <code>Environment</code> type from the string slice:</p>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered">
+<span class="kw">use</span> <span class="ident">mpesa</span>::<span class="ident">Mpesa</span>;
+<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">env</span>;
+<span class="kw">use</span> <span class="ident">dotenv</span>::<span class="ident">dotenv</span>;
+
+<span class="ident">dotenv</span>().<span class="ident">ok</span>();
+
+<span class="kw">let</span> <span class="ident">client</span>: <span class="ident">Mpesa</span> <span class="op">=</span> <span class="ident">Mpesa</span>::<span class="ident">new</span>(
+    <span class="ident">env</span>::<span class="ident">var</span>(<span class="string">&quot;CLIENT_KEY&quot;</span>).<span class="ident">unwrap</span>(),
+    <span class="ident">env</span>::<span class="ident">var</span>(<span class="string">&quot;CLIENT_SECRET&quot;</span>).<span class="ident">unwrap</span>(),
+    <span class="string">&quot;sandbox&quot;</span>.<span class="ident">parse</span>().<span class="ident">unwrap</span>(),
+);
+<span class="macro">assert</span><span class="macro">!</span>(<span class="ident">client</span>.<span class="ident">is_connected</span>().<span class="ident">unwrap</span>())</pre></div>
+<h3 id="services" class="section-header"><a href="#services">Services</a></h3>
+<p>The following services are currently available from the <code>Mpesa</code> client as methods that return builders:</p>
+<ul>
+<li>B2C</li>
+</ul>
+
+<div class='information'><div class='tooltip ignore'>ⓘ<span class='tooltiptext'>This example is not tested</span></div></div><div class="example-wrap"><pre class="rust rust-example-rendered ignore">
+<span class="kw">use</span> <span class="ident">mpesa</span>::{<span class="ident">Mpesa</span>, <span class="ident">MpesaResult</span>};
+<span class="kw">use</span> <span class="ident">serde_json</span>::<span class="ident">Value</span>;
+<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">env</span>;
+<span class="kw">use</span> <span class="ident">dotenv</span>::<span class="ident">dotenv</span>;
+
+<span class="ident">dotenv</span>().<span class="ident">ok</span>();
+ 
+<span class="kw">let</span> <span class="ident">client</span>: <span class="ident">Mpesa</span> <span class="op">=</span> <span class="ident">Mpesa</span>::<span class="ident">new</span>(
+    <span class="ident">env</span>::<span class="ident">var</span>(<span class="string">&quot;CLIENT_KEY&quot;</span>).<span class="ident">unwrap</span>(),
+    <span class="ident">env</span>::<span class="ident">var</span>(<span class="string">&quot;CLIENT_SECRET&quot;</span>).<span class="ident">unwrap</span>(),
+    <span class="string">&quot;sandbox&quot;</span>.<span class="ident">parse</span>().<span class="ident">unwrap</span>(),
+);
+
+<span class="kw">let</span> <span class="ident">response</span>: <span class="ident">MpesaResult</span><span class="op">&lt;</span><span class="ident">Value</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">client</span>
+    .<span class="ident">b2c</span>(<span class="string">&quot;testapi496&quot;</span>)
+    .<span class="ident">parties</span>(<span class="string">&quot;600496&quot;</span>, <span class="string">&quot;254708374149&quot;</span>)
+    .<span class="ident">urls</span>(<span class="string">&quot;https://testdomain.com/err&quot;</span>, <span class="string">&quot;https://testdomain.com/res&quot;</span>)
+    .<span class="ident">amount</span>(<span class="number">1000</span>)
+    .<span class="ident">send</span>();
+<span class="macro">assert</span><span class="macro">!</span>(<span class="ident">response</span>.<span class="ident">is_ok</span>())</pre></div>
+<ul>
+<li>B2B</li>
+</ul>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered">
+<span class="kw">use</span> <span class="ident">mpesa</span>::{<span class="ident">Mpesa</span>, <span class="ident">MpesaResult</span>};
+<span class="kw">use</span> <span class="ident">serde_json</span>::<span class="ident">Value</span>;
+<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">env</span>;
+<span class="kw">use</span> <span class="ident">dotenv</span>::<span class="ident">dotenv</span>;
+
+<span class="ident">dotenv</span>().<span class="ident">ok</span>();
+ 
+<span class="kw">let</span> <span class="ident">client</span>: <span class="ident">Mpesa</span> <span class="op">=</span> <span class="ident">Mpesa</span>::<span class="ident">new</span>(
+    <span class="ident">env</span>::<span class="ident">var</span>(<span class="string">&quot;CLIENT_KEY&quot;</span>).<span class="ident">unwrap</span>(),
+    <span class="ident">env</span>::<span class="ident">var</span>(<span class="string">&quot;CLIENT_SECRET&quot;</span>).<span class="ident">unwrap</span>(),
+    <span class="string">&quot;sandbox&quot;</span>.<span class="ident">parse</span>().<span class="ident">unwrap</span>(),
+);
+
+<span class="kw">let</span> <span class="ident">response</span>: <span class="ident">MpesaResult</span><span class="op">&lt;</span><span class="ident">Value</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">client</span>
+    .<span class="ident">b2b</span>(<span class="string">&quot;testapi496&quot;</span>)
+    .<span class="ident">parties</span>(<span class="string">&quot;600496&quot;</span>, <span class="string">&quot;600000&quot;</span>)
+    .<span class="ident">urls</span>(<span class="string">&quot;https://testdomain.com/err&quot;</span>, <span class="string">&quot;https://testdomain.com/api&quot;</span>)
+    .<span class="ident">account_ref</span>(<span class="string">&quot;254708374149&quot;</span>)
+    .<span class="ident">amount</span>(<span class="number">1000</span>)
+    .<span class="ident">send</span>();
+<span class="macro">assert</span><span class="macro">!</span>(<span class="ident">response</span>.<span class="ident">is_ok</span>())</pre></div>
+<ul>
+<li>C2B Register</li>
+</ul>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered">
+<span class="kw">use</span> <span class="ident">mpesa</span>::{<span class="ident">Mpesa</span>, <span class="ident">MpesaResult</span>};
+<span class="kw">use</span> <span class="ident">serde_json</span>::<span class="ident">Value</span>;
+<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">env</span>;
+<span class="kw">use</span> <span class="ident">dotenv</span>::<span class="ident">dotenv</span>;
+
+<span class="ident">dotenv</span>().<span class="ident">ok</span>();
+
+<span class="kw">let</span> <span class="ident">client</span>: <span class="ident">Mpesa</span> <span class="op">=</span> <span class="ident">Mpesa</span>::<span class="ident">new</span>(
+    <span class="ident">env</span>::<span class="ident">var</span>(<span class="string">&quot;CLIENT_KEY&quot;</span>).<span class="ident">unwrap</span>(),
+    <span class="ident">env</span>::<span class="ident">var</span>(<span class="string">&quot;CLIENT_SECRET&quot;</span>).<span class="ident">unwrap</span>(),
+    <span class="string">&quot;sandbox&quot;</span>.<span class="ident">parse</span>().<span class="ident">unwrap</span>(),
+);
+
+<span class="kw">let</span> <span class="ident">response</span>: <span class="ident">MpesaResult</span><span class="op">&lt;</span><span class="ident">Value</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">client</span>
+    .<span class="ident">c2b_register</span>()
+    .<span class="ident">short_code</span>(<span class="string">&quot;600496&quot;</span>)
+    .<span class="ident">confirmation_url</span>(<span class="string">&quot;https://testdomain.com/true&quot;</span>)
+    .<span class="ident">validation_url</span>(<span class="string">&quot;https://testdomain.com/valid&quot;</span>)
+    .<span class="ident">send</span>();
+<span class="macro">assert</span><span class="macro">!</span>(<span class="ident">response</span>.<span class="ident">is_ok</span>())</pre></div>
+<ul>
+<li>C2B Simulate</li>
+</ul>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered">
+<span class="kw">use</span> <span class="ident">mpesa</span>::{<span class="ident">Mpesa</span>, <span class="ident">MpesaResult</span>};
+<span class="kw">use</span> <span class="ident">serde_json</span>::<span class="ident">Value</span>;
+<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">env</span>;
+<span class="kw">use</span> <span class="ident">dotenv</span>::<span class="ident">dotenv</span>;
+
+<span class="ident">dotenv</span>().<span class="ident">ok</span>();
+ 
+<span class="kw">let</span> <span class="ident">client</span>: <span class="ident">Mpesa</span> <span class="op">=</span> <span class="ident">Mpesa</span>::<span class="ident">new</span>(
+    <span class="ident">env</span>::<span class="ident">var</span>(<span class="string">&quot;CLIENT_KEY&quot;</span>).<span class="ident">unwrap</span>(),
+    <span class="ident">env</span>::<span class="ident">var</span>(<span class="string">&quot;CLIENT_SECRET&quot;</span>).<span class="ident">unwrap</span>(),
+    <span class="string">&quot;sandbox&quot;</span>.<span class="ident">parse</span>().<span class="ident">unwrap</span>(),
+);
+
+<span class="kw">let</span> <span class="ident">response</span>: <span class="ident">MpesaResult</span><span class="op">&lt;</span><span class="ident">Value</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">client</span>
+    .<span class="ident">c2b_simulate</span>()
+    .<span class="ident">short_code</span>(<span class="string">&quot;600496&quot;</span>)
+    .<span class="ident">msisdn</span>(<span class="string">&quot;254700000000&quot;</span>)
+    .<span class="ident">amount</span>(<span class="number">1000</span>)
+    .<span class="ident">send</span>();
+<span class="macro">assert</span><span class="macro">!</span>(<span class="ident">response</span>.<span class="ident">is_ok</span>())</pre></div>
+<ul>
+<li>Account Balance</li>
+</ul>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered">
+<span class="kw">use</span> <span class="ident">mpesa</span>::{<span class="ident">Mpesa</span>, <span class="ident">MpesaResult</span>};
+<span class="kw">use</span> <span class="ident">serde_json</span>::<span class="ident">Value</span>;
+<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">env</span>;
+<span class="kw">use</span> <span class="ident">dotenv</span>::<span class="ident">dotenv</span>;
+
+<span class="ident">dotenv</span>().<span class="ident">ok</span>();
+ 
+<span class="kw">let</span> <span class="ident">client</span>: <span class="ident">Mpesa</span> <span class="op">=</span> <span class="ident">Mpesa</span>::<span class="ident">new</span>(
+    <span class="ident">env</span>::<span class="ident">var</span>(<span class="string">&quot;CLIENT_KEY&quot;</span>).<span class="ident">unwrap</span>(),
+    <span class="ident">env</span>::<span class="ident">var</span>(<span class="string">&quot;CLIENT_SECRET&quot;</span>).<span class="ident">unwrap</span>(),
+    <span class="string">&quot;sandbox&quot;</span>.<span class="ident">parse</span>().<span class="ident">unwrap</span>(),
+);
+
+<span class="kw">let</span> <span class="ident">response</span>: <span class="ident">MpesaResult</span><span class="op">&lt;</span><span class="ident">Value</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">client</span>
+    .<span class="ident">account_balance</span>(<span class="string">&quot;testapi496&quot;</span>)
+    .<span class="ident">urls</span>(<span class="string">&quot;https://testdomain.com/err&quot;</span>, <span class="string">&quot;https://testdomain.com/ok&quot;</span>)
+    .<span class="ident">party_a</span>(<span class="string">&quot;600496&quot;</span>)
+    .<span class="ident">send</span>();
+<span class="macro">assert</span><span class="macro">!</span>(<span class="ident">response</span>.<span class="ident">is_ok</span>())</pre></div>
+<p>More will be added progressively, pull requests welcome</p>
 <h2 id="author" class="section-header"><a href="#author">Author</a></h2>
 <p><strong>Collins Muriuki</strong></p>
+<ul>
+<li>Twitter: <a href="https://twitter.com/collinsmuriuki_">@collinsmuriuki_</a></li>
+<li>Not affiliated with Safaricom in any way.</li>
+</ul>
 <h2 id="license" class="section-header"><a href="#license">License</a></h2>
 <p>This project is MIT licensed</p>
-</div><h2 id='reexports' class='section-header'><a href="#reexports">Re-exports</a></h2>
-<table><tr><td><code>pub use constants::<a class="enum" href="constants/enum.CommandId.html" title="enum mpesa::constants::CommandId">CommandId</a>;</code></td></tr><tr><td><code>pub use constants::<a class="enum" href="constants/enum.IdentifierTypes.html" title="enum mpesa::constants::IdentifierTypes">IdentifierTypes</a>;</code></td></tr><tr><td><code>pub use environment::<a class="enum" href="environment/enum.Environment.html" title="enum mpesa::environment::Environment">Environment</a>;</code></td></tr><tr><td><code>pub use mpesa_security::<a class="trait" href="mpesa_security/trait.MpesaSecurity.html" title="trait mpesa::mpesa_security::MpesaSecurity">MpesaSecurity</a>;</code></td></tr></table><h2 id='modules' class='section-header'><a href="#modules">Modules</a></h2>
-<table><tr class='module-item'><td><a class="mod" href="constants/index.html" title='mpesa::constants mod'>constants</a></td><td class='docblock-short'></td></tr><tr class='module-item'><td><a class="mod" href="environment/index.html" title='mpesa::environment mod'>environment</a></td><td class='docblock-short'></td></tr><tr class='module-item'><td><a class="mod" href="mpesa_security/index.html" title='mpesa::mpesa_security mod'>mpesa_security</a></td><td class='docblock-short'></td></tr><tr class='module-item'><td><a class="mod" href="payloads/index.html" title='mpesa::payloads mod'>payloads</a></td><td class='docblock-short'></td></tr></table><h2 id='structs' class='section-header'><a href="#structs">Structs</a></h2>
+</div><h2 id='modules' class='section-header'><a href="#modules">Modules</a></h2>
+<table><tr class='module-item'><td><a class="mod" href="services/index.html" title='mpesa::services mod'>services</a></td><td class='docblock-short'></td></tr></table><h2 id='structs' class='section-header'><a href="#structs">Structs</a></h2>
 <table><tr class='module-item'><td><a class="struct" href="struct.Mpesa.html" title='mpesa::Mpesa struct'>Mpesa</a></td><td class='docblock-short'><p>Mpesa client that will facilitate communication with the Safaricom API</p>
 </td></tr></table><h2 id='enums' class='section-header'><a href="#enums">Enums</a></h2>
-<table><tr class='module-item'><td><a class="enum" href="enum.ResponseType.html" title='mpesa::ResponseType enum'>ResponseType</a></td><td class='docblock-short'><p>C2B Register Response types</p>
-</td></tr></table></section><section id="search" class="content hidden"></section><section class="footer"></section><script>window.rootPath = "../";window.currentCrate = "mpesa";</script><script src="aliases.js"></script><script src="main.js"></script><script defer src="search-index.js"></script></body></html>
+<table><tr class='module-item'><td><a class="enum" href="enum.CommandId.html" title='mpesa::CommandId enum'>CommandId</a></td><td class='docblock-short'><p>Mpesa command ids</p>
+</td></tr><tr class='module-item'><td><a class="enum" href="enum.Environment.html" title='mpesa::Environment enum'>Environment</a></td><td class='docblock-short'><p>Enum to map to desired environment so as to access certificate
+and the base url
+Required to construct a new <code>Mpesa</code> struct</p>
+</td></tr><tr class='module-item'><td><a class="enum" href="enum.IdentifierTypes.html" title='mpesa::IdentifierTypes enum'>IdentifierTypes</a></td><td class='docblock-short'><p>Identifier types - both sender and receiver - identify an M-Pesa transaction’s sending and receiving party as
+either a shortcode, a till number or a MSISDN (phone number).
+There are three identifier types that can be used with M-Pesa APIs.</p>
+</td></tr><tr class='module-item'><td><a class="enum" href="enum.MpesaError.html" title='mpesa::MpesaError enum'>MpesaError</a></td><td class='docblock-short'><p>Mpesa error stack</p>
+</td></tr><tr class='module-item'><td><a class="enum" href="enum.ResponseType.html" title='mpesa::ResponseType enum'>ResponseType</a></td><td class='docblock-short'><p>C2B Register Response types</p>
+</td></tr></table><h2 id='traits' class='section-header'><a href="#traits">Traits</a></h2>
+<table><tr class='module-item'><td><a class="trait" href="trait.MpesaSecurity.html" title='mpesa::MpesaSecurity trait'>MpesaSecurity</a></td><td class='docblock-short'><p>Trait responsible for implementation of security configs for Mpesa</p>
+</td></tr></table><h2 id='types' class='section-header'><a href="#types">Type Definitions</a></h2>
+<table><tr class='module-item'><td><a class="type" href="type.MpesaResult.html" title='mpesa::MpesaResult type'>MpesaResult</a></td><td class='docblock-short'><p><code>Result</code> enum type alias</p>
+</td></tr></table></section><section id="search" class="content hidden"></section><section class="footer"></section><script>window.rootPath = "../";window.currentCrate = "mpesa";</script><script src="../aliases.js"></script><script src="../main.js"></script><script defer src="../search-index.js"></script></body></html>

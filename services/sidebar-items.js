@@ -1,0 +1,1 @@
+initSidebarItems({"struct":[["AccountBalanceBuilder",""],["B2bBuilder","B2B transaction builder struct"],["B2cBuilder","B2C transaction builder struct"],["C2bRegisterBuilder","C2B Register builder"],["C2bSimulateBuilder",""]]});
