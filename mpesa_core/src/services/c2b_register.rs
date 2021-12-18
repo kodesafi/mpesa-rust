@@ -2,16 +2,30 @@ use crate::client::{Mpesa, MpesaResult};
 use crate::constants::ResponseType;
 use crate::errors::MpesaError;
 use reqwest::blocking::Client;
-use serde::Serialize;
+use serde::{Deserialize, Serialize};
 use serde_json::Value;
 
 #[derive(Debug, Serialize)]
 /// Payload to register the 3rd party’s confirmation and validation URLs to M-Pesa
 struct C2bRegisterPayload<'a> {
-    ValidationURL: &'a str,
-    ConfirmationURL: &'a str,
-    ResponseType: ResponseType,
-    ShortCode: &'a str,
+    #[serde(rename(serialize = "ValidationURL"))]
+    validation_url: &'a str,
+    #[serde(rename(serialize = "ConfirmationURL"))]
+    confirmation_url: &'a str,
+    #[serde(rename(serialize = "ResponseType"))]
+    response_type: ResponseType,
+    #[serde(rename(serialize = "ShortCode"))]
+    short_code: &'a str,
+}
+
+#[derive(Debug, Deserialize, Clone)]
+pub struct C2bRegisterResponse {
+    #[serde(rename(deserialize = "ConversationID"), skip_serializing_if = "None")]
+    pub conversation_id: Option<String>,
+    #[serde(rename(deserialize = "OriginatorCoversationID"))]
+    pub originator_coversation_id: String,
+    #[serde(rename(deserialize = "ResponseDescription"))]
+    pub response_description: String,
 }
 
 #[derive(Debug)]
@@ -85,17 +99,17 @@ impl<'a> C2bRegisterBuilder<'a> {
     ///
     /// # Errors
     /// Returns a `MpesaError` on failure
-    pub fn send(self) -> MpesaResult<Value> {
+    pub fn send(self) -> MpesaResult<C2bRegisterResponse> {
         let url = format!(
             "{}/mpesa/c2b/v1/registerurl",
             self.client.environment().base_url()
         );
 
         let payload = C2bRegisterPayload {
-            ValidationURL: self.validation_url.unwrap_or("None"),
-            ConfirmationURL: self.confirmation_url.unwrap_or("None"),
-            ResponseType: self.response_type.unwrap_or(ResponseType::Complete),
-            ShortCode: self.short_code.unwrap_or("None"),
+            validation_url: self.validation_url.unwrap_or("None"),
+            confirmation_url: self.confirmation_url.unwrap_or("None"),
+            response_type: self.response_type.unwrap_or(ResponseType::Complete),
+            short_code: self.short_code.unwrap_or("None"),
         };
 
         let response = Client::new()
@@ -105,7 +119,7 @@ impl<'a> C2bRegisterBuilder<'a> {
             .send()?;
 
         if response.status().is_success() {
-            let value: Value = response.json()?;
+            let value: C2bRegisterResponse = response.json()?;
             return Ok(value);
         }
 

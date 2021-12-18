@@ -2,18 +2,33 @@ use crate::client::{Mpesa, MpesaResult};
 use crate::constants::CommandId;
 use crate::errors::MpesaError;
 use reqwest::blocking::Client;
-use serde::Serialize;
+use serde::{Deserialize, Serialize};
 use serde_json::Value;
 
 #[derive(Debug, Serialize)]
 /// Payload to make payment requests from C2B.
 /// See more: https://developer.safaricom.co.ke/docs#c2b-api
 struct C2bSimulatePayload<'a> {
-    CommandID: CommandId,
-    Amount: u32,
-    Msisdn: &'a str,
-    BillRefNumber: &'a str,
-    ShortCode: &'a str,
+    #[serde(rename(serialize = "CommandID"))]
+    command_id: CommandId,
+    #[serde(rename(serialize = "Amount"))]
+    amount: u32,
+    #[serde(rename(serialize = "Msisdn"))]
+    msisdn: &'a str,
+    #[serde(rename(serialize = "BillRefNumber"))]
+    bill_ref_number: &'a str,
+    #[serde(rename(serialize = "ShortCode"))]
+    short_code: &'a str,
+}
+
+#[derive(Debug, Clone, Deserialize)]
+pub struct C2bSimulateResponse {
+    #[serde(rename(deserialize = "ConversationID"), skip_serializing_if = "None")]
+    pub conversation_id: Option<String>,
+    #[serde(rename(deserialize = "OriginatorCoversationID"))]
+    pub originator_coversation_id: String,
+    #[serde(rename(deserialize = "ResponseDescription"))]
+    pub response_description: String,
 }
 
 #[derive(Debug)]
@@ -93,18 +108,18 @@ impl<'a> C2bSimulateBuilder<'a> {
     ///
     /// # Errors
     /// Returns a `MpesaError` on failure
-    pub fn send(self) -> MpesaResult<Value> {
+    pub fn send(self) -> MpesaResult<C2bSimulateResponse> {
         let url = format!(
             "{}/mpesa/c2b/v1/simulate",
             self.client.environment().base_url()
         );
 
         let payload = C2bSimulatePayload {
-            CommandID: self.command_id.unwrap_or(CommandId::CustomerPayBillOnline),
-            Amount: self.amount.unwrap_or(10),
-            Msisdn: self.msisdn.unwrap_or("None"),
-            BillRefNumber: self.bill_ref_number.unwrap_or("None"),
-            ShortCode: self.short_code.unwrap_or("None"),
+            command_id: self.command_id.unwrap_or(CommandId::CustomerPayBillOnline),
+            amount: self.amount.unwrap_or(10),
+            msisdn: self.msisdn.unwrap_or("None"),
+            bill_ref_number: self.bill_ref_number.unwrap_or("None"),
+            short_code: self.short_code.unwrap_or("None"),
         };
 
         let response = Client::new()
@@ -114,7 +129,7 @@ impl<'a> C2bSimulateBuilder<'a> {
             .send()?;
 
         if response.status().is_success() {
-            let value: Value = response.json()?;
+            let value: C2bSimulateResponse = response.json()?;
             return Ok(value);
         }
 

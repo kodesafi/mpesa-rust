@@ -2,22 +2,41 @@ use crate::client::MpesaResult;
 use crate::constants::{CommandId, IdentifierTypes};
 use crate::{Mpesa, MpesaError, MpesaSecurity};
 use reqwest::blocking::Client;
-use serde::Serialize;
+use serde::{Deserialize, Serialize};
 use serde_json::Value;
 
 #[derive(Debug, Serialize)]
 /// Account Balance payload
 struct AccountBalancePayload<'a> {
-    Initiator: &'a str,
-    SecurityCredential: &'a str,
-    CommandID: CommandId,
-    PartyA: &'a str,
-    IdentifierType: &'a str,
-    Remarks: &'a str,
-    QueueTimeOutURL: &'a str,
-    ResultURL: &'a str,
+    #[serde(rename(serialize = "Initiator"))]
+    initiator: &'a str,
+    #[serde(rename(serialize = "SecurityCredential"))]
+    security_credential: &'a str,
+    #[serde(rename(serialize = "CommandID"))]
+    command_id: CommandId,
+    #[serde(rename(serialize = "PartyA"))]
+    party_a: &'a str,
+    #[serde(rename(serialize = "IdentifierType"))]
+    identifier_type: &'a str,
+    #[serde(rename(serialize = "Remarks"))]
+    remarks: &'a str,
+    #[serde(rename(serialize = "QueueTimeOutURL"))]
+    queue_time_out_url: &'a str,
+    #[serde(rename(serialize = "ResultURL"))]
+    result_url: &'a str,
 }
 
+#[derive(Debug, Deserialize, Clone)]
+pub struct AccountBalanceResponse {
+    #[serde(rename(deserialize = "ConversationID"))]
+    pub conversation_id: String,
+    #[serde(rename(deserialize = "OriginatorConversationID"))]
+    pub originator_conversation_id: String,
+    #[serde(rename(deserialize = "ResponseCode"))]
+    pub response_code: String,
+    #[serde(rename(deserialize = "ResponseDescription"))]
+    pub response_description: String,
+}
 #[derive(Debug)]
 pub struct AccountBalanceBuilder<'a> {
     initiator_name: &'a str,
@@ -86,10 +105,29 @@ impl<'a> AccountBalanceBuilder<'a> {
         self
     }
 
+    // Adds `QueueTimeoutUrl` This is a required field
+    ///
+    /// # Error
+    /// If `QueueTimeoutUrl` is invalid or not provided
+    pub fn timeout_url(mut self, timeout_url: &'a str) -> AccountBalanceBuilder<'a> {
+        self.queue_timeout_url = Some(timeout_url);
+        self
+    }
+
+    // Adds `ResultUrl` This is a required field
+    ///
+    /// # Error
+    /// If `ResultUrl` is invalid or not provided
+    pub fn result_url(mut self, result_url: &'a str) -> AccountBalanceBuilder<'a> {
+        self.result_url = Some(result_url);
+        self
+    }
+
     /// Adds `QueueTimeoutUrl` and `ResultUrl`. This is a required field
     ///
     /// # Error
     /// If either `QueueTimeoutUrl` and `ResultUrl` is invalid or not provided
+    #[deprecated]
     pub fn urls(mut self, timeout_url: &'a str, result_url: &'a str) -> AccountBalanceBuilder<'a> {
         self.queue_timeout_url = Some(timeout_url);
         self.result_url = Some(result_url);
@@ -104,7 +142,7 @@ impl<'a> AccountBalanceBuilder<'a> {
     ///
     /// # Errors
     /// Returns a `MpesaError` on failure
-    pub fn send(self) -> MpesaResult<Value> {
+    pub fn send(self) -> MpesaResult<AccountBalanceResponse> {
         let url = format!(
             "{}/mpesa/accountbalance/v1/query",
             self.client.environment().base_url()
@@ -113,17 +151,17 @@ impl<'a> AccountBalanceBuilder<'a> {
         let credentials = self.client.gen_security_credentials()?;
 
         let payload = AccountBalancePayload {
-            CommandID: self.command_id.unwrap_or(CommandId::AccountBalance),
-            PartyA: self.party_a.unwrap_or("None"),
-            IdentifierType: &self
+            command_id: self.command_id.unwrap_or(CommandId::AccountBalance),
+            party_a: self.party_a.unwrap_or("None"),
+            identifier_type: &self
                 .identifier_type
                 .unwrap_or(IdentifierTypes::ShortCode)
                 .to_string(),
-            Remarks: self.remarks.unwrap_or("None"),
-            Initiator: self.initiator_name,
-            QueueTimeOutURL: self.queue_timeout_url.unwrap_or("None"),
-            ResultURL: self.result_url.unwrap_or("None"),
-            SecurityCredential: &credentials,
+            remarks: self.remarks.unwrap_or("None"),
+            initiator: self.initiator_name,
+            queue_time_out_url: self.queue_timeout_url.unwrap_or("None"),
+            result_url: self.result_url.unwrap_or("None"),
+            security_credential: &credentials,
         };
 
         let response = Client::new()
@@ -133,7 +171,7 @@ impl<'a> AccountBalanceBuilder<'a> {
             .send()?;
 
         if response.status().is_success() {
-            let value: Value = response.json()?;
+            let value: AccountBalanceResponse = response.json()?;
             return Ok(value);
         }
 

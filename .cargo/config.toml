@@ -1,0 +1,10 @@
+[build]
+rustdoc = "rustdoc" 
+
+[profile.release]
+lto = "fat"
+debug = 1
+codegen-units = 1
+
+[alias]
+t = ["test", "--all-features", "--no-fail-fast"]
